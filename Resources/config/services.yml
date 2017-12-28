@@ -1,0 +1,4 @@
+services:
+    tallanto_client_api:
+        class: Tallanto\ClientApiBundlle\TallantoClientApiBundle
+        arguments: ['@service_container']
