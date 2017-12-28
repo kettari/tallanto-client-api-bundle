@@ -3,7 +3,7 @@
 namespace Tallanto\ClientApiBundle\Exception;
 
 
-class TransportTallantoException extends \Exception
+class TransportTallantoException extends TallantoClientException
 {
 
 }
