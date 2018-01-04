@@ -10,12 +10,17 @@ namespace Tallanto\ClientApiBundle\Api\Method;
 
 use Tallanto\Api\Entity\Contact;
 
-class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod
+class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
 {
   /**
    * @var string
    */
   private $query;
+
+  /**
+   * @var boolean
+   */
+  private $expand = false;
 
   /**
    * TallantoGetContactsMethod constructor.
@@ -42,7 +47,7 @@ class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod
    */
   public function getQueryParameters()
   {
-    $params = ['expand' => 'true'];
+    $params = ['expand' => $this->isExpand() ? 'true' : 'false'];
     if (!is_null($this->getQuery())) {
       $params['q'] = $this->getQuery();
     }
@@ -82,5 +87,24 @@ class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod
     }
 
     return $result;
+  }
+
+  /**
+   * @return bool
+   */
+  public function isExpand(): bool
+  {
+    return $this->expand;
+  }
+
+  /**
+   * @param bool $expand
+   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetContactsMethod
+   */
+  public function setExpand(bool $expand)
+  {
+    $this->expand = $expand;
+
+    return $this;
   }
 }

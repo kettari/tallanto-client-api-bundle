@@ -47,12 +47,31 @@ class TallantoGetUsersMethod extends AbstractCollectionTallantoMethod implements
    */
   public function getQueryParameters()
   {
-    $params = ['expand' => $this->expand ? 'true' : 'false'];
+    $params = ['expand' => $this->isExpand() ? 'true' : 'false'];
     if (!is_null($this->getQuery())) {
       $params['q'] = $this->getQuery();
     }
 
     return $params;
+  }
+
+  /**
+   * @return bool
+   */
+  public function isExpand(): bool
+  {
+    return $this->expand;
+  }
+
+  /**
+   * @param bool $expand
+   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetUsersMethod
+   */
+  public function setExpand(bool $expand)
+  {
+    $this->expand = $expand;
+
+    return $this;
   }
 
   /**
@@ -87,24 +106,5 @@ class TallantoGetUsersMethod extends AbstractCollectionTallantoMethod implements
     }
 
     return $result;
-  }
-
-  /**
-   * @return bool
-   */
-  public function isExpand(): bool
-  {
-    return $this->expand;
-  }
-
-  /**
-   * @param bool $expand
-   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetUsersMethod
-   */
-  public function setExpand(bool $expand)
-  {
-    $this->expand = $expand;
-
-    return $this;
   }
 }
