@@ -74,7 +74,7 @@ class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod impleme
   }
 
   /**
-   * Returns array of tickets.
+   * Returns array of contacts.
    *
    * @param array $items
    * @return array

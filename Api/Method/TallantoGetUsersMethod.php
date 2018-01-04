@@ -8,7 +8,7 @@
 
 namespace Tallanto\ClientApiBundle\Api\Method;
 
-use Tallanto\Api\Entity\Contact;
+use Tallanto\Api\Entity\User;
 
 class TallantoGetUsersMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
 {
@@ -93,16 +93,16 @@ class TallantoGetUsersMethod extends AbstractCollectionTallantoMethod implements
   }
 
   /**
-   * Returns array of tickets.
+   * Returns array of users.
    *
    * @param array $items
    * @return array
    */
-  public function getContacts($items)
+  public function getUsers($items)
   {
     $result = [];
     foreach ($items as $item) {
-      $result[] = new Contact($item);
+      $result[] = new User($item);
     }
 
     return $result;
