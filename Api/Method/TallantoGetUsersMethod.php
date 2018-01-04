@@ -8,9 +8,9 @@
 
 namespace Tallanto\ClientApiBundle\Api\Method;
 
-use Tallanto\Api\Entity\Contact;
+use Tallanto\Api\Entity\User;
 
-class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
+class TallantoGetUsersMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
 {
   /**
    * @var string
@@ -39,7 +39,7 @@ class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod impleme
    */
   public function getUri()
   {
-    return '/api/v1/contacts';
+    return '/api/v1/users';
   }
 
   /**
@@ -53,6 +53,25 @@ class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod impleme
     }
 
     return $params;
+  }
+
+  /**
+   * @return bool
+   */
+  public function isExpand(): bool
+  {
+    return $this->expand;
+  }
+
+  /**
+   * @param bool $expand
+   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetUsersMethod
+   */
+  public function setExpand(bool $expand)
+  {
+    $this->expand = $expand;
+
+    return $this;
   }
 
   /**
@@ -74,37 +93,18 @@ class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod impleme
   }
 
   /**
-   * Returns array of contacts.
+   * Returns array of users.
    *
    * @param array $items
    * @return array
    */
-  public function getContacts($items)
+  public function getUsers($items)
   {
     $result = [];
     foreach ($items as $item) {
-      $result[] = new Contact($item);
+      $result[] = new User($item);
     }
 
     return $result;
-  }
-
-  /**
-   * @return bool
-   */
-  public function isExpand(): bool
-  {
-    return $this->expand;
-  }
-
-  /**
-   * @param bool $expand
-   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetContactsMethod
-   */
-  public function setExpand(bool $expand)
-  {
-    $this->expand = $expand;
-
-    return $this;
   }
 }
