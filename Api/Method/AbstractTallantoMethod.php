@@ -64,4 +64,15 @@ abstract class AbstractTallantoMethod implements TallantoMethodInterface
     return [];
   }
 
+  /**
+   * Returns array of request headers.
+   *
+   * @return array|null
+   */
+  public function getRequestHeaders()
+  {
+    return [];
+  }
+
+
 }

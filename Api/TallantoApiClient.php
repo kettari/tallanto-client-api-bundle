@@ -57,6 +57,8 @@ class TallantoApiClient
     }
     // Get query parameters
     $options['query'] = $method->getQueryParameters();
+    // Get request headers
+    $options['headers'] = $method->getRequestHeaders();
 
     // Does endpoint pageable?
     if ($method instanceof PageableTallantoMethodInterface) {
