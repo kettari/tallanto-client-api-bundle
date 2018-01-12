@@ -10,7 +10,7 @@ namespace Tallanto\ClientApiBundle\Api\Method;
 
 use Tallanto\Api\Entity\ClassEntity;
 
-class TallantoGetUserClassesMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
+class TallantoGetUsersClassesMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
 {
   /**
    * @var string
@@ -67,7 +67,7 @@ class TallantoGetUserClassesMethod extends AbstractCollectionTallantoMethod impl
 
   /**
    * @param bool $expand
-   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetUserClassesMethod
+   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetUsersClassesMethod
    */
   public function setExpand(bool $expand)
   {
@@ -112,10 +112,10 @@ class TallantoGetUserClassesMethod extends AbstractCollectionTallantoMethod impl
 
   /**
    * @param \DateTime $modifiedSince
-   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetUserClassesMethod
+   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetUsersClassesMethod
    */
   public function setModifiedSince(\DateTime $modifiedSince
-  ): TallantoGetUserClassesMethod {
+  ): TallantoGetUsersClassesMethod {
     $this->modifiedSince = $modifiedSince;
 
     return $this;
