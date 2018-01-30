@@ -13,6 +13,11 @@ use Tallanto\Api\Entity\Contact;
 class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
 {
   /**
+   * @var \DateTime
+   */
+  private $modifiedSince;
+
+  /**
    * @var string
    */
   private $query;
@@ -99,12 +104,46 @@ class TallantoGetContactsMethod extends AbstractCollectionTallantoMethod impleme
 
   /**
    * @param bool $expand
-   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetContactsMethod
+   * @return TallantoGetContactsMethod
    */
   public function setExpand(bool $expand)
   {
     $this->expand = $expand;
 
     return $this;
+  }
+
+  /**
+   * @return \DateTime
+   */
+  public function getModifiedSince()
+  {
+    return $this->modifiedSince;
+  }
+
+  /**
+   * @param \DateTime $modifiedSince
+   * @return TallantoGetContactsMethod
+   */
+  public function setModifiedSince(\DateTime $modifiedSince
+  ): TallantoGetContactsMethod {
+    $this->modifiedSince = $modifiedSince;
+
+    return $this;
+  }
+
+  /**
+   * Returns array of request headers.
+   *
+   * @return array|null
+   */
+  public function getRequestHeaders()
+  {
+    $headers = parent::getRequestHeaders();
+    if (!is_null($this->modifiedSince)) {
+      $headers['If-Modified-Since'] = $this->modifiedSince->format('r');
+    }
+
+    return $headers;
   }
 }
