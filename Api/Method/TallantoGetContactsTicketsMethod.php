@@ -10,7 +10,7 @@ namespace Tallanto\ClientApiBundle\Api\Method;
 
 use Tallanto\Api\Entity\Ticket;
 
-class TallantoGetTicketsMethod extends AbstractCollectionTallantoMethod
+class TallantoGetContactsTicketsMethod extends AbstractCollectionTallantoMethod
 {
   /**
    * @var string
@@ -18,11 +18,11 @@ class TallantoGetTicketsMethod extends AbstractCollectionTallantoMethod
   private $contactId;
 
   /**
-   * TallantoGetTicketsMethod constructor.
+   * TallantoGetContactsTicketsMethod constructor.
    *
    * @param string $contactId
    */
-  public function __construct($contactId)
+  public function __construct(string $contactId)
   {
     $this->contactId = $contactId;
   }

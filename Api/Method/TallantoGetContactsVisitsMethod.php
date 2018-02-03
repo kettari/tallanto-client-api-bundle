@@ -32,7 +32,7 @@ class TallantoGetContactsVisitsMethod extends AbstractCollectionTallantoMethod i
    *
    * @param string $contactId
    */
-  public function __construct($contactId)
+  public function __construct(string $contactId)
   {
     $this->contactId = $contactId;
   }
