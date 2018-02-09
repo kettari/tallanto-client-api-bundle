@@ -10,12 +10,12 @@ namespace Tallanto\ClientApiBundle\Api\Method;
 
 use Tallanto\Api\Entity\Visit;
 
-class TallantoGetContactsVisitsMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
+class TallantoGetTicketsVisitsMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
 {
   /**
    * @var string
    */
-  private $contactId;
+  private $ticketId;
 
   /**
    * @var \DateTime
@@ -28,13 +28,13 @@ class TallantoGetContactsVisitsMethod extends AbstractCollectionTallantoMethod i
   private $expand = false;
 
   /**
-   * TallantoGetContactsMethod constructor.
+   * TallantoGetTicketsVisitsMethod constructor.
    *
-   * @param string $contactId
+   * @param string $ticketId
    */
-  public function __construct(string $contactId)
+  public function __construct(string $ticketId)
   {
-    $this->contactId = $contactId;
+    $this->ticketId = $ticketId;
   }
 
   /**
@@ -44,7 +44,7 @@ class TallantoGetContactsVisitsMethod extends AbstractCollectionTallantoMethod i
    */
   public function getUri()
   {
-    return sprintf('/api/v1/contacts/%s/visits', $this->contactId);
+    return sprintf('/api/v1/tickets/%s/visits', $this->ticketId);
   }
 
   /**
@@ -67,7 +67,7 @@ class TallantoGetContactsVisitsMethod extends AbstractCollectionTallantoMethod i
 
   /**
    * @param bool $expand
-   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetContactsVisitsMethod
+   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetTicketsVisitsMethod
    */
   public function setExpand(bool $expand)
   {
@@ -112,10 +112,10 @@ class TallantoGetContactsVisitsMethod extends AbstractCollectionTallantoMethod i
 
   /**
    * @param \DateTime $modifiedSince
-   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetContactsVisitsMethod
+   * @return \Tallanto\ClientApiBundle\Api\Method\TallantoGetTicketsVisitsMethod
    */
   public function setModifiedSince(\DateTime $modifiedSince
-  ): TallantoGetContactsVisitsMethod {
+  ): TallantoGetTicketsVisitsMethod {
     $this->modifiedSince = $modifiedSince;
 
     return $this;
@@ -139,9 +139,9 @@ class TallantoGetContactsVisitsMethod extends AbstractCollectionTallantoMethod i
   /**
    * @return string
    */
-  public function getContactId()
+  public function getTicketId()
   {
-    return $this->contactId;
+    return $this->ticketId;
   }
 
 

@@ -10,21 +10,31 @@ namespace Tallanto\ClientApiBundle\Api\Method;
 
 use Tallanto\Api\Entity\Ticket;
 
-class TallantoGetTicketsMethod extends AbstractCollectionTallantoMethod
+class TallantoGetTicketsMethod extends AbstractCollectionTallantoMethod implements TallantoExpandableInterface
 {
+  /**
+   * @var \DateTime
+   */
+  private $modifiedSince;
+
   /**
    * @var string
    */
-  private $contactId;
+  private $query;
+
+  /**
+   * @var boolean
+   */
+  private $expand = false;
 
   /**
    * TallantoGetTicketsMethod constructor.
    *
-   * @param string $contactId
+   * @param string $query
    */
-  public function __construct($contactId)
+  public function __construct($query = null)
   {
-    $this->contactId = $contactId;
+    $this->query = $query;
   }
 
   /**
@@ -34,15 +44,20 @@ class TallantoGetTicketsMethod extends AbstractCollectionTallantoMethod
    */
   public function getUri()
   {
-    return sprintf('/api/v1/contacts/%s/tickets', $this->getContactId());
+    return '/api/v1/tickets';
   }
 
   /**
-   * @return string
+   * @return array
    */
-  public function getContactId()
+  public function getQueryParameters()
   {
-    return $this->contactId;
+    $params = ['expand' => $this->isExpand() ? 'true' : 'false'];
+    if (!is_null($this->getQuery())) {
+      $params['q'] = $this->getQuery();
+    }
+
+    return $params;
   }
 
   /**
@@ -53,6 +68,14 @@ class TallantoGetTicketsMethod extends AbstractCollectionTallantoMethod
   public function getMethod()
   {
     return 'GET';
+  }
+
+  /**
+   * @return string
+   */
+  public function getQuery()
+  {
+    return $this->query;
   }
 
   /**
@@ -73,5 +96,58 @@ class TallantoGetTicketsMethod extends AbstractCollectionTallantoMethod
     }
 
     return $result;
+  }
+
+  /**
+   * @return bool
+   */
+  public function isExpand(): bool
+  {
+    return $this->expand;
+  }
+
+  /**
+   * @param bool $expand
+   * @return TallantoGetTicketsMethod
+   */
+  public function setExpand(bool $expand)
+  {
+    $this->expand = $expand;
+
+    return $this;
+  }
+
+  /**
+   * @return \DateTime
+   */
+  public function getModifiedSince()
+  {
+    return $this->modifiedSince;
+  }
+
+  /**
+   * @param \DateTime $modifiedSince
+   * @return TallantoGetTicketsMethod
+   */
+  public function setModifiedSince(\DateTime $modifiedSince
+  ): TallantoGetTicketsMethod {
+    $this->modifiedSince = $modifiedSince;
+
+    return $this;
+  }
+
+  /**
+   * Returns array of request headers.
+   *
+   * @return array|null
+   */
+  public function getRequestHeaders()
+  {
+    $headers = parent::getRequestHeaders();
+    if (!is_null($this->modifiedSince)) {
+      $headers['If-Modified-Since'] = $this->modifiedSince->format('r');
+    }
+
+    return $headers;
   }
 }
