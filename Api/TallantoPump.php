@@ -9,7 +9,7 @@ use Tallanto\ClientApiBundle\Exception\ResponseDecodeException;
 
 class TallantoPump
 {
-  const MAX_PAGE_SIZE = 1000;
+  const MAX_PAGE_SIZE = 100;
 
   /**
    * @var \Tallanto\ClientApiBundle\Api\TallantoApiClient
@@ -20,6 +20,11 @@ class TallantoPump
    * @var \Tallanto\ClientApiBundle\Api\Method\TallantoMethodInterface
    */
   private $endpoint;
+
+  /**
+   * @var int
+   */
+  private $maxPageSize = self::MAX_PAGE_SIZE;
 
   /**
    * TallantoPump constructor.
@@ -45,7 +50,7 @@ class TallantoPump
   {
     if ($this->endpoint instanceof PageableTallantoMethodInterface) {
       $this->endpoint->setPageNumber(1)
-        ->setPageSize(self::MAX_PAGE_SIZE);
+        ->setPageSize($this->maxPageSize);
     } else {
       throw new \Exception(
         'Tallanto pump works only with PageableTallantoMethodInterface endpoints.'
@@ -89,4 +94,14 @@ class TallantoPump
     return $totalResult;
   }
 
+  /**
+   * @param int $maxPageSize
+   * @return TallantoPump
+   */
+  public function setMaxPageSize(int $maxPageSize): TallantoPump
+  {
+    $this->maxPageSize = $maxPageSize;
+
+    return $this;
+  }
 }
